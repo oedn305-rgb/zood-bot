@@ -1,0 +1,24 @@
+name: Camel Ads Scraper
+
+on:
+  schedule:
+    - cron: '0 * * * *' # يشتغل تلقائياً كل ساعة
+  workflow_dispatch: # يسمح لك بتشغيله يدوي الحين
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run scraper
+        run: python camel_bot.py
